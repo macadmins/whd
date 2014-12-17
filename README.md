@@ -3,7 +3,7 @@ whdDocker
 
 This is a Dockerized version of [WebHelpDesk](http://www.webhelpdesk.com/).  This is based on the RHEL rpm installed on a CentOS 6 base.
 
-How To Setup Sal, Sal-WHD, and JSSImport with Docker:
+How to use WebHelpDesk with Docker:
 =========
 
 Installing Docker:
@@ -28,8 +28,7 @@ commands.
 5. chkconfig docker on
 6. docker -v
 7. docker pull postgres
-8. docker pull centos:centos6
-9. docker pull nmcspadden/whd
+8. docker pull nmcspadden/whd
 
 Preparing Data Files:
 ------
