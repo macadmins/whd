@@ -30,11 +30,6 @@ commands.
 7. docker pull postgres
 8. docker pull nmcspadden/whd
 
-Preparing Data Files:
-------
-
-1. git clone [https://github.com/nmcspadden/MacModelShelf.git](https://github.com/nmcspadden/MacModelShelf.git) /usr/local/sal_data/macmodelshelf
-
 Preparing Database Setup Scripts:
 -----
 
