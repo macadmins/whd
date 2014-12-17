@@ -3,32 +3,6 @@ whdDocker
 
 This is a Dockerized version of [WebHelpDesk](http://www.webhelpdesk.com/).  This is based on the RHEL rpm installed on a CentOS 6 base.
 
-How to use WebHelpDesk with Docker:
-=========
-
-Installing Docker:
-------
-
-This guide was done on CentOS 6.5.  It should work about the same for any
-other RedHat-based platform, including Fedora and RHEL.  For Ubuntu or Debian,
-you'd have to replace the yum commands with applicable apt-get install
-commands.
-
-1. yum install -y epel-release
-2. yum install -y git
-3. yum install -y docker-io
-    1. **Enable testing repo: --enablerepo=epel-testing, allows you to skip next step, installs 1.3.2**
-4. **Manually update Docker:**
-    1. service docker stop
-    2. killall docker
-    3. wget [https://get.docker.com/builds/Linux/x86_64/docker-latest](https://get.docker.com/builds/Linux/x86_64/docker-latest) -O docker
-    4. chmod +x docker
-    5. mv docker /usr/bin/docker
-    6. service docker start
-5. chkconfig docker on
-6. docker -v
-7. docker pull postgres
-8. docker pull macadmins/whd
 
 Preparing Database Setup Scripts:
 -----
