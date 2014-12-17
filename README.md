@@ -17,7 +17,7 @@ commands.
 1. yum install -y epel-release
 2. yum install -y git
 3. yum install -y docker-io
-    1.**Enable testing repo: --enablerepo=epel-testing, allows you to skip Step 5, installs 1.3.2**
+    1. **Enable testing repo: --enablerepo=epel-testing, allows you to skip next step, installs 1.3.2**
 4. **Manually update Docker:**
     1. service docker stop
     2. killall docker
@@ -41,27 +41,19 @@ Preparing Database Setup Scripts:
         3. DB_PASS=password
 
 
-Run the WHD DB To Prepare the Configurations:
+Prepare the data container for the DB:
 -----
 
-1. docker run -d -v /usr/local/whd_data/db:/var/lib/postgresql/data --name "postgres-whd" postgres
-2. docker stop postgres-whd
-3. docker rm postgres-whd
-4. Change /usr/local/whd_data/db/pg_hba.conf:
-    1. Add "host all all 172.17.0..1/16 trust" to IPv4 Local Connections
-    2. sed -i '/host    all             all             127.0.0.1\/32            trust/a host    all             all             172.17.0.1\/16            trust' /usr/local/whd_data/db/pg_hba.conf
-5. docker run -d -v /usr/local/whd_data/db:/var/lib/postgresql/data --name "postgres-whd" postgres
-6. ./setup_whd_db.sh
+1. docker run -d --name whd-db-data --entrypoint /bin/echo nmcspadden/postgres-whd Data-only container for postgres-whd
+2. docker run -d --name postgres-whd --volumes-from whd-db-data nmcspadden/postgres-whd
+3. ./setup_whd_db.sh
 
-Prepare the Conf Files and Run WHD:
+Prepare the data container for WHD:
 -----
 
-1. docker run -d -p 8081:8081 --link postgres-sal:saldb --link postgres-whd:db --name "whd" nmcspadden/whd
-2. docker cp whd:/usr/local/webhelpdesk/conf /usr/local/whd_data/
-       * **We need to copy out the conf to feed it back in later - it's possible in the future that we can just provide this ahead of time, but for now, we need to copy it out and reload the Docker container with the conf directory.**
-4. docker stop whd
-5. docker rm whd
-6. docker run -d -p 8081:8081 --link postgres-sal:saldb --link postgres-whd:db -v /usr/local/whd_data/conf:/usr/local/webhelpdesk/conf --name "whd" nmcspadden/whd
+1. docker run -d --name whd-data --entrypoint /bin/echo nmcspadden/whd Data-only container for whd
+2. docker run -d -p 8081:8081 --link postgres-whd:db --name "whd" --volumes-from whd-data nmcspadden/whd
+
 
 Configure WHD Through Browser:
 ----
