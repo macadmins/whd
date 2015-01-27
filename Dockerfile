@@ -5,7 +5,7 @@ FROM centos:centos6
 MAINTAINER Nick McSpadden "nmcspadden@gmail.com"
 
 ADD http://downloads.solarwinds.com/solarwinds/Release/WebHelpDesk/12.2.0/webhelpdesk-12.2.0-1.x86_64.rpm.gz /webhelpdesk.rpm.gz 
-RUN gunzip /webhelpdesk.rpm.gz && rm /webhelpdesk.rpm.gz
+RUN gunzip -dv /webhelpdesk.rpm.gz
 RUN yum install -y webhelpdesk-12.2.0-1.x86_64.rpm
 RUN rm webhelpdesk-12.2.0-1.x86_64.rpm
 RUN cp /usr/local/webhelpdesk/conf/whd.conf.orig /usr/local/webhelpdesk/conf/whd.conf
