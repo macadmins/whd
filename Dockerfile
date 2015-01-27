@@ -9,12 +9,7 @@ RUN gunzip -dv /webhelpdesk.rpm.gz
 RUN yum install -y /webhelpdesk.rpm && rm /webhelpdesk.rpm
 RUN cp /usr/local/webhelpdesk/conf/whd.conf.orig /usr/local/webhelpdesk/conf/whd.conf
 RUN sed -i 's/^PRIVILEGED_NETWORKS=[[:space:]]*$/PRIVILEGED_NETWORKS=172.17.42.1/g' /usr/local/webhelpdesk/conf/whd.conf
-ADD run.sh /run.sh
-ADD supervisord.conf /home/docker/whd/supervisord.conf
-RUN yum install -y python-setuptools
-RUN easy_install supervisor
-RUN yum clean all
 
 EXPOSE 8081
 
-CMD ["/run.sh"]
+CMD ["/usr/local/webhelpdesk/whd", "start"]
