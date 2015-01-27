@@ -16,5 +16,6 @@ RUN yum install -y python-setuptools && yum clean all
 RUN easy_install supervisor
 
 EXPOSE 8081
+EXPOSE 443
 
 CMD ["/run.sh"]
