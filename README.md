@@ -7,7 +7,7 @@ This is a Dockerized version of [WebHelpDesk](http://www.webhelpdesk.com/).  Thi
 Prepare the data container for the DB:
 -----
 
-1. `docker run -d --name whd-db-data --entrypoint /bin/echo macadmins/postgres-whd Data-only container for postgres-whd`
+1. `docker run -d --name whd-db-data --entrypoint /bin/echo macadmins/postgres Data-only container for postgres-whd`
 2. `docker run -d --name postgres-whd --volumes-from whd-db-data -e DB_NAME=whd -e DB_USER=whddbadmin -e DB_PASS=password macadmins/postgres`
 
 Prepare the data container for WHD:
